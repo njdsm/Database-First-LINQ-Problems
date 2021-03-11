@@ -37,8 +37,8 @@ CREATE TABLE ShoppingCart (
     CONSTRAINT PK_ShoppingCart PRIMARY KEY (UserId, ProductId)
 );
 
-INSERT INTO Users (Email, Password) VALUES ('oda@gmail.com', 'OdasPass123');
-INSERT INTO Users (Email, Password) VALUES ('afton@gmail.com', 'AftonsPass123');
+INSERT INTO Users (Email, Password, RegistrationDate) VALUES ('oda@gmail.com', 'OdasPass123', '2020-1-20');
+INSERT INTO Users (Email, Password, RegistrationDate) VALUES ('afton@gmail.com', 'AftonsPass123', '2020-1-20');
 INSERT INTO Users (Email, Password, RegistrationDate) VALUES ('bibi@gmail.com', 'BibisPass123', '2017-4-6');
 INSERT INTO Users (Email, Password, RegistrationDate) VALUES ('janett@gmail.com', 'JanettsPass123', '2015-10-15');
 INSERT INTO Users (Email, Password, RegistrationDate) VALUES ('gary@gmail.com', 'GarysPass123', '2012-10-15');
