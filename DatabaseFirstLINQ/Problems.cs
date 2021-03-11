@@ -48,7 +48,7 @@
 //        private void ProblemTwo()
 //        {
 //            // Write a LINQ query that retrieves the users from the User tables then print each user's email to the console.
-//            var users = _context.Users.ToList();
+//            var users = _context.Users;
 
 //            foreach (User user in users)
 //            {
