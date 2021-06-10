@@ -55,6 +55,7 @@ namespace DatabaseFirstLINQ
             {
                 Console.WriteLine(user.Email);
             }
+
         }
 
         private void ProblemThree()
