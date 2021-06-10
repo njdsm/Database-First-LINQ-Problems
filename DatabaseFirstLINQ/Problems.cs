@@ -17,9 +17,9 @@ namespace DatabaseFirstLINQ
         {
             //Console.WriteLine(ProblemOne());
             //ProblemTwo();
-            ProblemThree();
+            //ProblemThree();
             //ProblemFour();
-            //ProblemFive();
+            ProblemFive();
             //ProblemSix();
             //ProblemSeven();
             //ProblemEight();
@@ -69,21 +69,36 @@ namespace DatabaseFirstLINQ
             {
                 Console.WriteLine(product.Name + " " + product.Price);
             }
-
         }
 
-        private void ProblemFour()
-        {
-            // Write a LINQ query that gets each product that contains an "s" in the products name.
-            // Then print the name of each product from the above query to the console.
+        //private void ProblemFour()
+        //{
+        //    // Write a LINQ query that gets each product that contains an "s" in the products name.
+        //    // Then print the name of each product from the above query to the console.
+        //    var products = _context.Products;
 
-        }
+        //    var productsWithS = products.Select(p => p.Name.Contains('s'));
+
+        //    foreach(var product in productsWithS)
+        //    {
+        //        Console.WriteLine(product.Name);
+        //    }
+        //}
 
         private void ProblemFive()
         {
             // Write a LINQ query that gets all of the users who registered BEFORE 2016
             // Then print each user's email and registration date to the console.
 
+            var users = _context.Users;
+            var date = new DateTime(2016, 1, 1, 0, 0, 0);
+
+            var usersBefore2016 = users.Where(user => user.RegistrationDate < date);
+            
+            foreach(var userDate in usersBefore2016)
+            {
+                Console.WriteLine(userDate.Email + " " + userDate.RegistrationDate);
+            }
         }
 
         private void ProblemSix()
