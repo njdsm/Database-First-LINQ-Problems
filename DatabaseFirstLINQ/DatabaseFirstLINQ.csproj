@@ -8,11 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
-<<<<<<< HEAD
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7">
-=======
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4">
->>>>>>> 82ff623d2165e987648cd7c0049f83d3dbbbb68b
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
