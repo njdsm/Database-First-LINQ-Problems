@@ -170,11 +170,6 @@ namespace DatabaseFirstLINQ
                     }
                 }
             }
-
-            //var productEmployee = _context.Users.Include(ur => ur.UserRoles).Include(ur => ur.ShoppingCarts).Include(ur => ur.Product)
-
-            //ShoppingCarts.Include(ur => ur.User).Include(ur => ur.Product).Include(ur => ur.UserRoles)
-
         }
 
         // <><><><><><><><> CUD (Create, Update, Delete) Actions <><><><><><><><><>
