@@ -24,7 +24,7 @@ namespace DatabaseFirstLINQ
             //ProblemSeven();
             //ProblemEight();
             //ProblemNine();
-            //ProblemTen();
+            ProblemTen();
             //ProblemEleven();
             //ProblemTwelve();
             //ProblemThirteen();
@@ -37,7 +37,7 @@ namespace DatabaseFirstLINQ
             //ProblemTwenty();
             //Console.WriteLine(BonusOne());
             //BonusTwo();
-            BonusThree();
+            //BonusThree();
         }
 
         // <><><><><><><><> R Actions (Read) <><><><><><><><><>
@@ -160,19 +160,13 @@ namespace DatabaseFirstLINQ
             // Write a LINQ query that retreives all of the products in the shopping cart of users who have the role of "Employee".
             // Then print the user's email as well as the product's name, price, and quantity to the console.
 
-            var selectedEmployees = _context.UserRoles.Include(ur => ur.Role).Include(ur => ur.User).Where(ur => ur.Role.RoleName == "Employee").ToList();
-            var shoppingCartContents = _context.ShoppingCarts.Include(ur => ur.User).Include(ur => ur.Product);
+            var selectedEmployees = _context.UserRoles.Include(ur => ur.Role).Where(ur => ur.Role.RoleName == "Employee").Select(ur => ur.UserId);
+            var shoppingCartContents = _context.ShoppingCarts.Include(ur => ur.User).Include(ur => ur.Product).Where(ur => selectedEmployees.Contains(ur.UserId));
 
-            foreach (var emp in selectedEmployees)
+            foreach(var content in shoppingCartContents)
             {
-                foreach(var product in shoppingCartContents)
-                {
-                    if (product.UserId == emp.UserId)
-                    {
-                        Console.WriteLine(product.Product.Name + " " + product.Product.Price + " " + product.Quantity);
-                    }
-                }
-            }
+                Console.WriteLine(content.User.Email + " " + content.Product.Name + " " + content.Product.Price + " " + content.Quantity);
+            }           
         }
 
         // <><><><><><><><> CUD (Create, Update, Delete) Actions <><><><><><><><><>
@@ -422,29 +416,36 @@ namespace DatabaseFirstLINQ
 
                                 var shopCart = _context.ShoppingCarts.Include(p => p.Product);
 
+                                bool breakFor = false;
+
                                 foreach (var cart2 in customerCart2)
                                 {
-                                    Console.WriteLine(cart2.Product.Name);
-                                    Console.WriteLine(chosenProduct);
+                                    //Console.WriteLine(cart2.Product.Name);
+                                    //Console.WriteLine(chosenProduct);
                                     if (cart2.Product.Name == chosenProduct)
                                     {
                                         cart2.Quantity += 1;
                                         _context.ShoppingCarts.Update(cart2);
                                         _context.SaveChanges();
-                                        break;
+                                        breakFor = true;
                                     }
                                 }
 
-                                ShoppingCart newItem = new ShoppingCart()
+                                if (!breakFor)
                                 {
-                                    UserId = user.Id,
-                                    ProductId = Convert.ToInt32(selectedProduct),
-                                    Quantity = 1
-                                };
 
-                                _context.ShoppingCarts.Add(newItem);
-                                _context.SaveChanges();
-                                Console.WriteLine("Item Added!");
+                                    ShoppingCart newItem = new ShoppingCart()
+                                    {
+                                        UserId = user.Id,
+                                        ProductId = Convert.ToInt32(selectedProduct),
+                                        Quantity = 1
+                                    };
+
+                                    _context.ShoppingCarts.Add(newItem);
+                                    _context.SaveChanges();
+                                    Console.WriteLine("Item Added!");
+                                    break;
+                                }
                                 break;
 
                             case "4":
@@ -476,6 +477,9 @@ namespace DatabaseFirstLINQ
 
                                 break;
 
+                            default:
+                                Console.WriteLine("Select an option");
+                                break;
 
                         }
                     }
